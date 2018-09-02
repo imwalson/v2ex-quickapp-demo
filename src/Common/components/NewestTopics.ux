@@ -1,0 +1,69 @@
+<import name="TopicItem" src="./TopicItem"></import>
+
+<template>
+  <div class="latest-topic-componts">
+    <refresh @refresh="refresh" refreshing="{{isRefreshing2}}">
+      
+      <list class="latest-list">
+        <block for="latestTopicList">
+          <list-item type="article" class="list-li">
+            <TopicItem
+              avatarurl="{{ $item.member && $item.member.avatarUrl }}"
+              username="{{ $item.member && $item.member.username }}"
+              creatdate="{{ $item.creatDate }}"
+              title="{{ $item.title }}"
+              link="{{ $item.link }}"
+              topicid="{{ $item.id }}"
+            ></TopicItem>
+          </list-item>
+        </block>
+      </list>
+    </refresh>
+  </div>
+</template>
+
+<style lang="less">
+  .latest-topic-componts {
+    padding: 0;
+    background-color: #ededed;
+  }
+</style>
+  
+<script>
+  import router from '@system.router'
+  import api from '../api'
+  import util from '../../util'
+
+  export default {
+    data: {
+      latestTopicList: [],
+      isRefreshing2: false,
+    },
+    onInit () {
+      this.refresh({refreshing: true})
+    },
+    refresh(evt) {
+      this.isRefreshing2 = evt.refreshing;
+      this.getLatestTopicList();
+    },
+    getLatestTopicList() {
+      var _this = this;
+      api.latestTopicList()
+      .then((res)=>{
+        let list = res.map((item)=>{
+          item.creatDate = util.formatTime(item.created * 1000);
+          item.member.avatarUrl = 'https:' + item.member.avatar_normal.replace('s=24&','s=240&');
+          item.link = `https://www.v2ex.com/t/${item.id}`;
+          return item;
+        })
+        _this.latestTopicList = list || [];
+        _this.isRefreshing2 = false;
+      })
+      .catch((err)=>{
+        console.log(err);
+        _this.isRefreshing2 = false;
+      })
+    }
+
+  }
+</script>

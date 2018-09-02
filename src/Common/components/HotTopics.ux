@@ -1,0 +1,69 @@
+<import name="TopicItem" src="./TopicItem"></import>
+
+<template>
+  <div class="hot-topic-componts">
+    <refresh @refresh="refresh" refreshing="{{isRefreshing}}">
+      
+      <list class="hot-list">
+        <block for="hotTopicList">
+          <list-item type="article" class="list-li">
+            <TopicItem
+              avatarurl="{{ $item.member && $item.member.avatarUrl }}"
+              username="{{ $item.member && $item.member.username }}"
+              creatdate="{{ $item.creatDate }}"
+              title="{{ $item.title }}"
+              link="{{ $item.link }}"
+              topicid="{{ $item.id }}"
+            ></TopicItem>
+          </list-item>
+        </block>
+      </list>
+    </refresh>
+  </div>
+</template>
+
+<style lang="less">
+  .hot-topic-componts {
+    padding: 0;
+    background-color: #ededed;
+  }
+</style>
+  
+<script>
+  import router from '@system.router'
+  import api from '../api'
+  import util from '../../util'
+
+  export default {
+    data: {
+      hotTopicList: [],
+      isRefreshing: false,
+    },
+    onInit () {
+      this.refresh({refreshing: true})
+    },
+    refresh(evt) {
+      this.isRefreshing = evt.refreshing;
+      this.getHotTopicList();
+    },
+    getHotTopicList() {
+      var _this = this;
+      api.hotTopicList()
+      .then((res)=>{
+        let list = res.map((item)=>{
+          item.creatDate = util.formatTime(item.created * 1000);
+          item.member.avatarUrl = 'https:' + item.member.avatar_normal.replace('s=24&','s=240&');
+          item.link = `https://www.v2ex.com/t/${item.id}`;
+          return item;
+        })
+        _this.hotTopicList = list || [];
+        _this.isRefreshing = false;
+      })
+      .catch((err)=>{
+        console.log(err);
+        _this.isRefreshing = false;
+      })
+    }
+
+  }
+</script>

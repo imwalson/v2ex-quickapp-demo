@@ -1,0 +1,146 @@
+<template>
+  <div class="topic-item" onclick="openArticle(topicid,title)">
+    <div class="head-info">
+      <div class="avator-box unit-0">
+        <image src="{{ avatarurl || '' }}"></image>
+      </div>
+      <div class="user-info unit-0">
+        <div class="username">
+          <text>{{ username || '' }}</text>
+        </div>
+        <div class="date">
+          <text>{{ creatdate || '' }}</text>
+        </div>
+      </div>
+    </div>
+    <div class="title">
+      <text>{{ title || '' }}</text>
+    </div>
+  </div>
+</template>
+
+<style lang="less">
+  .topic-item {
+    padding: 20px;
+    width: 750px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+
+    .head-info {
+      height: 110px;
+      display: flex;
+      flex-direction: row;
+
+      .avator-box {
+        width: 110px;
+        height: 110px;
+        border-radius: 55px;
+
+        image {
+          width: 110px;
+          height: 110px;
+          border-radius: 55px;
+        }
+      }
+      .user-info {
+        width: 440px;
+        height: 110px;
+        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+
+        .username {
+          width: 440px;
+          height: 55px;
+
+          text {
+            font-size: 32px;
+            color: #101010;
+          }
+        }
+        .date {
+          width: 440px;
+          height: 55px;
+
+          text {
+            font-size: 26px;
+            color: #b1b1b1;
+          }
+        }
+      }
+      .tag-box {
+        width: 200px;
+        height: 110px;
+
+        .tag {
+          padding: 10px;
+          background-color: #eeeeee;
+          font-size: 24px;
+          color: #b7b7b7;
+        }
+      }
+    }
+
+    .title {
+      display: flex;
+      padding: 20px 0;
+
+      text {
+        font-size: 30px;
+        color: #101010;
+      }
+    }
+  }
+</style>
+
+<script>
+  import router from '@system.router'
+
+  export default {
+    props: {
+      avatarurl: {
+        type: String,
+        default: ''
+      },
+      username: {
+        type: String,
+        default: ''
+      },
+      creatdate: {
+        type: String,
+        default: ''
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      link: {
+        type: String,
+        default: 'https://www.v2ex.com/t/485309'
+      },
+      topicid: {
+        type: Number,
+        default: ''
+      }
+    },
+    openArticle(id,title) {
+      // router.push({
+      //   uri: 'Webview',
+      //   params: { 
+      //     title: title,
+      //     url: link
+      //   }
+      // })
+      router.push({
+        uri: 'TopicDetails',
+        params: { 
+          title: title,
+          id: id
+        }
+      })
+      
+    }
+  }
+</script>

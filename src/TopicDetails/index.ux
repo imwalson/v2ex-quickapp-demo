@@ -1,0 +1,28 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="topic-details-page">
+    <div class="section title-box">
+      <text>{{ title }}</text>
+    </div>
+    <div class="section head-info">
+      <div class="avator-box unit-0">
+        <image src="{{ details.member && details.member.avatarUrl }}"></image>
+      </div>
+      <div class="user-info unit-0">
+        <div class="username">
+          <text>{{ details.member && details.member.username }}</text>
+        </div>
+        <div class="date">
+          <text>{{ details.creatDate || '' }}</text>
+        </div>
+      </div>
+    </div>
+    <div class="section content-box">
+      <richtext type="html" class="content-richtext">{{ details.content_rendered || '' }}</richtext>
+    </div>
+
+  </div>
+</template>
+
+<style src="./index.less" lang="less"></style>
+<script src="./index.js"></script>
