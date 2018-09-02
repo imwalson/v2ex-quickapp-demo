@@ -4,7 +4,9 @@
 快应用版本的V2EX demo
 
 #### 项目截图
-
+![Alt text](/screenshot/Screenshot_1.jpg)
+![Alt text](/screenshot/Screenshot_2.jpg)
+![Alt text](/screenshot/Screenshot_3.jpg)
 
 ## Start
 
