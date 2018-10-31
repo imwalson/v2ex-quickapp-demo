@@ -4,9 +4,12 @@
 快应用版本的V2EX demo
 
 #### 项目截图
-![Alt text](/screenshot/Screenshot_1.jpg)
-![Alt text](/screenshot/Screenshot_2.jpg)
-![Alt text](/screenshot/Screenshot_3.jpg)
+<img src="/screenshot/Screenshot_1.jpg" alt="Screenshot_1" style="display:inline-block;width: 30%;">
+<img src="/screenshot/Screenshot_2.jpg" alt="Screenshot_2" style="display:inline-block;width: 30%;">
+<img src="/screenshot/Screenshot_3.jpg" alt="Screenshot_3" style="display:inline-block;width: 30%;">
+
+#### 使用调试器扫码预览
+<img src="/screenshot/qa_v2ex_qr.png" alt="Qr code" style="width: 50%">
 
 ## Start
 
